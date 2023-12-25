@@ -12,3 +12,7 @@ The gazebo.launch runs a script which maps the joints for inverse end effector p
 
 The link attacher should be used only on some models created not on the ground plane
 
+
+
+https://github.com/KeerthivasanIITMadras/serial_walking_arm/assets/94305617/90870c0a-956d-4b80-9f26-164fa5ff5917
+

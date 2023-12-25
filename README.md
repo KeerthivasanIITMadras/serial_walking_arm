@@ -5,7 +5,7 @@
 ### To run the execution wrt to base_link
 ```rosrun b47_walking_control move.py```
 ### To run the execution wrt to end effector
-```rosrun b47_walking_control move_inv.py```
+``` ROS_NAMESPACE=/inv_arm rosrun b47_walking_control move_inv.py```
 
 ### Note:
 The gazebo.launch runs a script which maps the joints for inverse end effector planning, no need to run separately

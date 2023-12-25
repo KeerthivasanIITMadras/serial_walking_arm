@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find b47_inv_moveit)/config/ros_controllers.yaml" command="load"/>
+
+  <!-- Load the controllers -->
+  <node name="controller_spawner_inv" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args="inv_arm_controller "/>
+
+</launch>

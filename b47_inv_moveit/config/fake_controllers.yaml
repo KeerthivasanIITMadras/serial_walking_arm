@@ -1,0 +1,14 @@
+controller_list:
+  - name: fake_inv_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - link_04_link_05
+      - link_03_link_04
+      - link_02_link_03
+      - link_01_link_02
+      - base_link_link_01
+initial:  # Define initial robot poses per group
+#  - group: inv_arm
+#    pose: home
+
+  []

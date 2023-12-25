@@ -1,0 +1,65 @@
+# MoveIt-specific simulation settings
+moveit_sim_hw_interface:
+  joint_model_group: controllers_initial_group_
+  joint_model_group_pose: controllers_initial_pose_
+# Settings for ros_control control loop
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.01
+# Settings for ros_control hardware interface
+hardware_interface:
+  joints:
+    - link_04_link_05
+    - link_03_link_04
+    - link_02_link_03
+    - link_01_link_02
+    - base_link_link_01
+# Creates the /joint_states topic necessary in ROS
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+inv_arm_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - link_04_link_05
+    - link_03_link_04
+    - link_02_link_03
+    - link_01_link_02
+    - base_link_link_01
+  gains:
+    link_04_link_05:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    link_03_link_04:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    link_02_link_03:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    link_01_link_02:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    base_link_link_01:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+controller_list:
+  - name: inv_arm_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - link_04_link_05
+      - link_03_link_04
+      - link_02_link_03
+      - link_01_link_02
+      - base_link_link_01

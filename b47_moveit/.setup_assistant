@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: b47_description
+    relative_path: urdf/b47.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/b47.srdf
+  CONFIG:
+    author_name: Keerthivasan
+    author_email: keerthivasan517@gmail.com
+    generated_timestamp: 1703365203

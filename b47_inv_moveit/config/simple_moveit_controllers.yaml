@@ -1,0 +1,11 @@
+controller_list:
+  - name: inv_arm_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - link_04_link_05
+      - link_03_link_04
+      - link_02_link_03
+      - link_01_link_02
+      - base_link_link_01

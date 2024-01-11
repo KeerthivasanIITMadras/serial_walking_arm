@@ -28,28 +28,28 @@ arm_controller:
     - link_04_link_05
   gains:
     base_link_link_01:
-      p: 200
-      d: 1
+      p: 1200
+      d: 100
       i: 1
       i_clamp: 1
     link_01_link_02:
       p: 1200
-      d: 20
+      d: 100
       i: 1
       i_clamp: 1
     link_02_link_03:
       p: 1200
-      d: 20
+      d: 100
       i: 1
       i_clamp: 1
     link_03_link_04:
       p: 1200
-      d: 20
+      d: 100
       i: 1
       i_clamp: 1
     link_04_link_05:
-      p: 200
-      d: 1
+      p: 1200
+      d: 100
       i: 1
       i_clamp: 1
 controller_list:

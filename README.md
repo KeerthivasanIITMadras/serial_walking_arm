@@ -13,6 +13,7 @@ This runs both the move groups simultaneously meaning it can be controlled with 
 
 ### Note:
 The gazebo.launch runs a script which maps the joints for inverse end effector planning, no need to run separately
+
 ```rosrun b47_walking_control combined.py```
 
 The link attacher should be used only on some models created not on the ground plane

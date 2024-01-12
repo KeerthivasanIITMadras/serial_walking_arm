@@ -12,6 +12,10 @@ This runs both the move groups simultaneously meaning it can be controlled with 
 
 ```rosrun b47_walking_control combined.py```
 
+### To run the teleop node
+
+```rosrun b47_walking_control teleop.py```
+
 ### Note:
 The gazebo.launch runs a script which maps the joints for inverse end effector planning, no need to run separately
 

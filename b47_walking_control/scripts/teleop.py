@@ -1,9 +1,9 @@
 #!/usr/bin/env python
+from getch import getche, getch
 import rospy
 import moveit_commander
 from geometry_msgs.msg import Pose
 from gazebo_ros_link_attacher.srv import Attach, AttachRequest, AttachResponse
-
 
 class Move_Arm:
     def __init__(self):
@@ -98,15 +98,89 @@ class Attacher:
         req.link_name_2 = link_name_2
         self.detach_srv.call(req)
 
+    
 if __name__ == "__main__":
-    rospy.init_node("combined")
-    rospy.loginfo("Starting move_arm")
+    rospy.init_node("b47_teleop")
+    rospy.loginfo("Starting node")
+
     attacher = Attacher()
     attacher.attach_request("test_surface","link","robot","base_link")
+
     move_arm = Move_Arm()
-    move_arm.give_goal(1.3936,0,0.2031,0,1,0,0)
-    attacher.detach_request("test_surface","link","robot","base_link")
-    attacher.attach_request("test_surface","link","robot","link_05")
-    move_arm = Move_Arm()
-    move_arm.give_goal_inv(-1.3936,0,0.2031,0,1,0,0)
-    attacher.detach_request("test_surface","link","robot","link_05")
+
+    counter = 0 # this is used to keep track of which control it is taking
+
+    step_size = 1.3
+    
+    msg = """
+Reading from the keyboard 
+---------------------------
+Moving around:
+     w    
+a    s   
+t : increase step size by 0.1
+b : decrease step size by 0
+CTRL-C to quit
+        """
+        
+    rate = rospy.Rate(10.0)
+    while not rospy.is_shutdown():
+        print(msg)
+        key = getch()
+
+        if key=="t":
+            step_size+=0.1
+        
+        if key=="b":
+            step_size-=0.1
+            
+        if key == "w":
+            if counter == 0:
+                attacher.attach_request("test_surface","link","robot","base_link")
+                move_arm.give_goal(step_size ,0,0.2031,0,1,0,0)
+                counter = 1
+                attacher.detach_request("test_surface","link","robot","base_link")
+            else:
+                attacher.attach_request("test_surface","link","robot","link_05")
+                move_arm.give_goal_inv(step_size,0,0.2031,0,1,0,0)
+                counter = 0
+                attacher.detach_request("test_surface","link","robot","link_05")
+
+
+        if key == "a":
+            if counter == 0:
+                attacher.attach_request("test_surface","link","robot","base_link")
+                move_arm.give_goal(0,step_size,0.2031,0,1,0,0)
+                counter = 1
+                attacher.detach_request("test_surface","link","robot","base_link")
+            else:
+                attacher.attach_request("test_surface","link","robot","link_05")
+                move_arm.give_goal_inv(0,step_size,0.2031,0,1,0,0)
+                counter = 0
+                attacher.detach_request("test_surface","link","robot","link_05")
+
+        if key == "d":
+           if counter == 0:
+               attacher.attach_request("test_surface","link","robot","base_link")
+               move_arm.give_goal(0,-step_size,0.2031,0,1,0,0)
+               counter = 1
+               attacher.detach_request("test_surface","link","robot","base_link")
+           else:
+               attacher.attach_request("test_surface","link","robot","link_05")
+               move_arm.give_goal_inv(0,-step_size,0.2031,0,1,0,0)
+               counter = 0
+               attacher.detach_request("test_surface","link","robot","link_05")
+
+        if key == "w":
+            if counter == 0:
+                attacher.attach_request("test_surface","link","robot","base_link")
+                move_arm.give_goal(-step_size ,0,0.2031,0,1,0,0)
+                counter = 1
+                attacher.detach_request("test_surface","link","robot","base_link")
+            else:
+                attacher.attach_request("test_surface","link","robot","link_05")
+                move_arm.give_goal_inv(-step_size,0,0.2031,0,1,0,0)
+                counter = 0
+                attacher.detach_request("test_surface","link","robot","link_05")
+
+        rate.sleep()
